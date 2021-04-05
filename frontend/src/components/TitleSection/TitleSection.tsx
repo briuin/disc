@@ -3,7 +3,7 @@ import styles from "./TitleSection.module.scss";
 
 export interface TitleSectionProps {
   title: string;
-  description: string;
+  description: any;
 }
 
 const TitleSection: React.FC<TitleSectionProps> = (

@@ -16,8 +16,8 @@ function App() {
   const [step, setStep] = useState(1);
 
   const stepMappers = [
-    { step: 1, component: <BasicInfo></BasicInfo> },
-    { step: 2, component: <DISC></DISC> },
+    { step: 1, component: <BasicInfo /> },
+    { step: 2, component: <DISC /> },
   ];
 
   return (
