@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from 'react';
+import { BasicInfoProps } from './BasicInfo';
 
 const LazyBasicInfo = lazy(() => import('./BasicInfo'));
 
-const BasicInfo = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+const BasicInfo = (props: BasicInfoProps & { children?: React.ReactNode; }) => (
   <Suspense fallback={null}>
     <LazyBasicInfo {...props} />
   </Suspense>

@@ -1,1 +1,43 @@
-.DISC {}
+.DISC {
+  table {
+    border-collapse: separate;
+    border-spacing: 0 4px;
+
+    th {
+      font-weight: normal;
+      height: 2.5em;
+      min-width: 48px;
+      padding: 0.25em;
+      text-align: center;
+      vertical-align: middle;
+      width: 120px;
+    }
+
+    tbody {
+      tr {
+        margin-top: 4px;
+        line-height: 20px;
+        background-color: #f8f9fa;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        min-width: 48px;
+        max-width: 288px;
+        padding: 8px;
+        text-align: left;
+        font-size: 14px;
+        td {
+          height: 2.5em;
+          min-width: 48px;
+          padding: 0.25em;
+          text-align: center;
+          vertical-align: middle;
+          width: 120px;
+
+          &:first-child {
+              text-align: left;
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ export interface PaginationProps {
   totalPages: number;
   page: number;
   gotoPage: (page: number) => void;
+  submit?: () => void;
 }
 
 const Pagination: React.FC<PaginationProps> = (props) => {
@@ -36,7 +37,7 @@ const Pagination: React.FC<PaginationProps> = (props) => {
     </Button>
   );
   const submitButton = (
-    <Button variant="contained" color="primary">
+    <Button variant="contained" color="primary" onClick={props.submit}>
       提交
     </Button>
   );

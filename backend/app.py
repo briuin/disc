@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, jsonify, redirect, request, url_for
 from pymongo import MongoClient
 from flask_cors import CORS, cross_origin
 import json
@@ -16,6 +16,11 @@ names_col = db.get_collection('names_col')
 def addname(name):
     names_col.insert_one({"name": name.lower()})
     return redirect(url_for('getnames'))
+
+@app.route('/addRecord', methods=['POST'])
+def addRecord():
+    print(request.data)
+    return jsonify({})
 
 @app.route('/getnames/')
 def getnames():

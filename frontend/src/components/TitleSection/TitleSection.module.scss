@@ -10,8 +10,12 @@
   width: 100%;
   box-sizing: border-box;
 
+  &.Half {
+    padding: 0;
+  }
+
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     background-color: rgb(103, 58, 183);
     top: 0px;
@@ -20,5 +24,26 @@
     width: 100%;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
+  }
+
+  .Half {
+    div {
+      padding: 24px;
+      background-color: rgb(103, 58, 183);
+      margin: 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: .1px;
+      line-height: 24px;
+      font-weight: 400;
+      color: white;
+    }
+
+    p {
+      padding: 24px;
+      font-size: 12px;
+    }
   }
 }

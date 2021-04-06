@@ -1,12 +1,17 @@
 import { TextField } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import InputSection from "../InputSection/InputSection.lazy";
 import TitleSection from "../TitleSection/TitleSection.lazy";
 import styles from "./BasicInfo.module.scss";
 
-const BasicInfo: React.FC = () => {
-  const [name, setName] = useState("");
-  const [position, setPosition] = useState("");
+export interface BasicInfoProps {
+  username: string;
+  setName: (name: string) => void;
+  position: string;
+  setPosition: (position: string) => void;
+}
+
+const BasicInfo: React.FC<BasicInfoProps> = (props) => {
 
   return (
     <div className={styles.BasicInfo}>
@@ -16,16 +21,16 @@ const BasicInfo: React.FC = () => {
           <TextField
             label="我的名字是"
             placeholder="您的回答"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={props.username}
+            onChange={(event) => props.setName(event.target.value)}
           />
         </InputSection>
         <InputSection>
           <TextField
             label="我要應徵的職位是"
             placeholder="您的回答"
-            value={position}
-            onChange={(event) => setPosition(event.target.value)}
+            value={props.position}
+            onChange={(event) => props.setPosition(event.target.value)}
           />
         </InputSection>
       </form>
