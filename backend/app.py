@@ -9,26 +9,22 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 mongoClient = MongoClient('mongodb://127.0.0.1:27017')
-db = mongoClient.get_database('names_db')
-names_col = db.get_collection('names_col')
-
-@app.route('/addname/<name>/')
-def addname(name):
-    names_col.insert_one({"name": name.lower()})
-    return redirect(url_for('getnames'))
+db = mongoClient.get_database('disc_db')
+disc_col = db.get_collection('disc_col')
 
 @app.route('/addRecord', methods=['POST'])
 def addRecord():
-    print(request.data)
+    data = json.loads(request.data.decode('utf-8'))
+    disc_col.insert_one({"name": data['name'], "position": data['position'], "results": data['results']})
     return jsonify({})
 
-@app.route('/getnames/')
-def getnames():
-    names_json = []
-    if names_col.find({}):
-        for name in names_col.find({}).sort("name"):
-            names_json.append({"name": name['name'], "id": str(name['_id'])})
-    return json.dumps(names_json)
+@app.route('/getRecords')
+def getRecords():
+    records_json = []
+    if disc_col.find({}):
+        for record in disc_col.find({}).sort('_id', -1):
+            records_json.append({"name": record['name'], "id": str(record['_id']), "position": record['position'], "results": record['results'], "time": str( record['_id'].generation_time.utcnow() )})
+    return json.dumps(records_json)
 
 if __name__ == "__main__":
     app.run(debug=True)
