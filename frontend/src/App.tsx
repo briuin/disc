@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import "./App.scss";
 import BasicInfo from "./components/BasicInfo/BasicInfo.lazy";
 import DISC from "./components/DISC/DISC.lazy";
 import Pagination from "./components/Pagination/Pagination.lazy";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import { Card, CardContent, Typography } from "@material-ui/core";
 
 interface Questions {
   title: string;
@@ -11,6 +13,63 @@ interface Questions {
 }
 
 function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path="/results">
+            <Results />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
+
+interface Record {
+  id: string;
+  name: string;
+  position: string;
+  time: string;
+  results: number[][];
+}
+
+function Results() {
+  const [records, setRecords] = useState<Record[]>([]);
+  useEffect(() => {
+    fetch("/getRecords")
+      .then((response) => response.json())
+      .then((json) => {
+        setRecords(json);
+      });
+  }, []);
+
+  const list = records.map((record) => (
+    <Card key={`${record.id}`} className="root">
+      <CardContent>
+        <Typography className="title" color="textSecondary" gutterBottom>
+          {record.position}
+        </Typography>
+        <Typography variant="h5" component="h2">
+          {record.name}
+        </Typography>
+        <Typography className="pos" color="textSecondary">
+          {record.time}
+        </Typography>
+        <Typography variant="body2" component="p">
+          {JSON.stringify(record.results)}
+        </Typography>
+      </CardContent>
+    </Card>
+  ));
+
+  return <Fragment>{list}</Fragment>;
+}
+
+function Home() {
   const [name, setName] = useState("");
   const [position, setPosition] = useState("");
   const [questions, setQuestions] = useState<Questions[]>([]);
@@ -82,7 +141,7 @@ function App() {
   ];
 
   return (
-    <div className="App">
+    <Fragment>
       {stepMappers.find((x) => x.step === step)?.component}
       <Pagination
         totalPages={2}
@@ -90,7 +149,7 @@ function App() {
         gotoPage={(step) => setStep(step)}
         submit={submit}
       />
-    </div>
+    </Fragment>
   );
 }
 
