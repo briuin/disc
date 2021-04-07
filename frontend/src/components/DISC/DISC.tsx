@@ -19,13 +19,14 @@ export interface DISCProps {
 
 const DISC: React.FC<DISCProps> = (props) => {
   const options = ["最像自己", "次像自己", "有點像自己", "不像自己"];
+  const optionValues = [9, 6, 3, 0];
   const optionsHeaders = options.map((x) => <th key={`th${x}`}>{x}</th>);
   const optionsBody = (questionSectionIndex: number, questionIndex: number) =>
     options.map((x, i) => (
       <td key={`td${x}`}>
         <Radio
-          checked={props.results[questionSectionIndex][questionIndex] === i}
-          value={i}
+          checked={props.results[questionSectionIndex][questionIndex] === optionValues[i]}
+          value={optionValues[i]}
           name={`question${questionIndex}`}
           onChange={(event) => {
             props.clearError!();

@@ -23,7 +23,7 @@ def getRecords():
     records_json = []
     if disc_col.find({}):
         for record in disc_col.find({}).sort('_id', -1):
-            records_json.append({"name": record['name'], "id": str(record['_id']), "position": record['position'], "results": record['results'], "time": str( record['_id'].generation_time.utcnow() )})
+            records_json.append({"name": record['name'], "id": str(record['_id']), "position": record['position'], "results": record['results'], "time": str( record['_id'].generation_time )})
     return json.dumps(records_json)
 
 if __name__ == "__main__":
