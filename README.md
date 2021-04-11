@@ -1,15 +1,8 @@
 # disc
 
-# build frontend code
+## Startup
 
 ```
-cd frontend
-yarn install
-yarn build
-```
-
-# start server(root folder)
-
-```
-python3 app.py
+docker-compose up --abort-on-container-exit --remove-orphans
+docker-compose exec mongo mongo --eval 'rs.initiate()'
 ```
